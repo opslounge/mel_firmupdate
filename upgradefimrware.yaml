@@ -1,0 +1,13 @@
+---
+# # This playbook will instal 40g Drivers for using mellanox IB cards on bare metel centos appliances
+# # #
+# # # To Run:
+# # # ansible-playbook cent40g.yaml
+# # #
+# # # Note you will want to configure the vlan information that is used in these playbooks
+# # # before the playbook gets invovked.  The group_vars/all file will be the place to look
+# #
+  - include: yum40firm.yaml
+  - include: install40firm.yaml
+  - include: reboot.yaml
+

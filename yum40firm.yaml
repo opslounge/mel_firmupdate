@@ -1,0 +1,6 @@
+---
+ - hosts: all
+
+   tasks:
+      - name: install the packages
+        command: yum -y install gcc rpm-build kernel-devel-3.10.0-693.el7.x86_64

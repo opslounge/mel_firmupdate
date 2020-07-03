@@ -1,0 +1,24 @@
+- hosts:  all
+  tasks:
+
+    - name: get the 40g firmware
+      get_url:
+         url: ftp://10.21.93.15/pub/drivers/mft-4.8.0-26-x86_64-rpm.tgz
+         dest: /root/mft-4.8.0-26-x86_64-rpm.tgz
+         mode: 0440
+    - name: get the bin file
+      get_url:
+         url: ftp://10.21.93.15/pub/drivers/fw-ConnectX3-rel-2_42_5000-MCX354A-FCB_A2-A5-FlexBoot-3.4.752.bin
+         dest: /root/fw-ConnectX3-rel-2_42_5000-MCX354A-FCB_A2-A5-FlexBoot-3.4.752.bin
+         mode: 0440
+         
+
+    - name: untar file
+      command: tar zxvf /root/mft-4.8.0-26-x86_64-rpm.tgz
+
+    - name: install the software on node
+      command: /root/mft-4.8.0-26-x86_64-rpm/./install.sh --oem
+#/usr/bin/flint -d 0000:42:00.0 q this command will quiery to validate what version of code 
+    - name: flash firmware on node using bin file
+      command: /usr/bin/flint -d 0000:42:00.0 -i /root/fw-ConnectX3-rel-2_42_5000-MCX354A-FCB_A2-A5-FlexBoot-3.4.752.bin burn
+#
